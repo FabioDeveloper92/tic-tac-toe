@@ -8,7 +8,7 @@
       @update:playerX="updatePlayerX"
       @update:playerO="updatePlayerO"
     />
-    <div v-if=" playerO && playerX " class="notification is-centered">
+   <div v-if=" playerO && playerX " class="notification is-centered">
     <div v-if="winner" class="has-text-success">
       Ha vinto {{ winner === 'X' ? playerX : playerO }}!
     </div>
@@ -32,7 +32,8 @@
 </template>
 
 <script>
-import { ref } from 'vue';
+import { computed } from 'vue'; 
+import { useTicTacToeStore } from '../../stores/useTicTacToeStore'
 import GameHeader from './GameHeader.vue';
 import GameBoard from './GameBoard.vue';
 import GameControls from './GameControls.vue';
@@ -40,73 +41,36 @@ import GameControls from './GameControls.vue';
 export default {
   components: { GameHeader, GameBoard, GameControls },
   setup() {
-    const playerX = ref('');
-    const playerO = ref('');
-    const scoreX = ref(0);
-    const scoreO = ref(0);
-    const board = ref(Array(9).fill(null));
-    const currentPlayer = ref('X');
-    const winner = ref(null);
-    const isDraw = ref(false);
-    const isStart = ref(false);
+    const ticTacToeStore = useTicTacToeStore();
+
+    const playerX = computed(() => ticTacToeStore.playerX);
+    const scoreX = computed(() => ticTacToeStore.scoreX);
+    const playerO = computed(() => ticTacToeStore.playerO);
+    const scoreO = computed(() => ticTacToeStore.scoreO);
+    const board = computed(() => ticTacToeStore.board);
+    const currentPlayer = computed(() => ticTacToeStore.currentPlayer);
+    const winner = computed(() => ticTacToeStore.winner);
+    const isDraw = computed(() => ticTacToeStore.isDraw);
+    const isStart = computed(() => ticTacToeStore.isStart);
 
     function updatePlayerX(value) {
-      playerX.value = value;
+      ticTacToeStore.updatePlayerX(value);
     }
 
     function updatePlayerO(value) {
-      playerO.value = value;
+      ticTacToeStore.updatePlayerO(value);
     }
 
-    function handleCellClick(index) {
-      if (board.value[index] || winner.value) return;
-      board.value[index] = currentPlayer.value;
-      if (checkWinner()) {
-        winner.value = currentPlayer.value;
-        if (currentPlayer.value === 'X') {
-          scoreX.value++;
-        } else {
-          scoreO.value++;
-        }
-      } else if (board.value.every(cell => cell !== null)) {
-        isDraw.value = true;
-      } else {
-        currentPlayer.value = currentPlayer.value === 'X' ? 'O' : 'X';
-      }
-
-      isStart.value = true;
-    }
-
-    function checkWinner() {
-      const lines = [
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-        [0, 3, 6],
-        [1, 4, 7],
-        [2, 5, 8],
-        [0, 4, 8],
-        [2, 4, 6]
-      ];
-      return lines.some(([a, b, c]) => {
-        return board.value[a] && board.value[a] === board.value[b] && board.value[a] === board.value[c];
-      });
+    function handleCellClick(value) {
+      ticTacToeStore.handleCellClick(value);
     }
 
     function startNewGame() {
-      board.value = Array(9).fill(null);
-      currentPlayer.value = 'X';
-      winner.value = null;
-      isDraw.value = false;
-      isStart.value = false;
+      ticTacToeStore.startNewGame();
     }
 
     function resetGame() {
-      startNewGame();
-      playerX.value = '';
-      playerO.value = '';
-      scoreX.value = 0;
-      scoreO.value = 0;
+      ticTacToeStore.resetGame();
     }
 
     return {
@@ -114,7 +78,7 @@ export default {
       playerO,
       scoreX,
       scoreO,
-      board,
+       board,
       currentPlayer,
       winner,
       isDraw,
