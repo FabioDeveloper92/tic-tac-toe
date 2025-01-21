@@ -1,4 +1,4 @@
-# Tic-Tac-Toe Project with Vue.js
+# Vue.js Tic-Tac-Toe Project
 
 ## Project Description
 
@@ -32,11 +32,11 @@ To run the project locally:
    ```
 3. Install dependencies:
    ```bash
-   npm install
+   pnpm install
    ```
 4. Start the development server:
    ```bash
-   npm run serve
+   pnpm run dev
    ```
 5. Open your browser and go to `http://localhost:8080` to see the project in action.
 
