@@ -1,7 +1,7 @@
 <template>
   <div class="game-header">
-    <input :value="playerX" @input="updatePlayerX" placeholder="Nome Giocatore X" />
-    <input :value="playerO" @input="updatePlayerO" placeholder="Nome Giocatore O" />
+    <input :value="playerX" @input="updatePlayerX" :placeholder="$t('playerXPlaceholder')" />
+    <input :value="playerO" @input="updatePlayerO" :placeholder="$t('playerOPlaceholder')" />
 
     <p v-show="playerX && playerO ">{{ playerX }} (X): {{ scoreX }} - {{ playerO }} (O): {{ scoreO }}</p>
 

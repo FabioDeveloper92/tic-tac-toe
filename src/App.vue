@@ -1,13 +1,6 @@
 <template>
   <div>
-    <nav class="navbar is-fixed-top">
-      <div class="navbar-brand">
-        <a class="navbar-item" href="/">
-          <img alt="Logo" src="@/assets/logo.svg" width="25" height="25" />
-        </a>
-        <a class="navbar-item" href="/">Home</a>
-      </div>
-    </nav>
+    <HeaderComponent />
     <main class="main-content">
     <div class="container is-fluid">
       <div class="columns">
@@ -22,6 +15,7 @@
 
 <script setup>
 import { onMounted } from 'vue';
+import HeaderComponent from './components/HeaderComponent.vue';
 
 onMounted(() => {
   // Gestione del menu per dispositivi mobili

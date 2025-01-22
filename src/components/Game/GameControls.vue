@@ -1,7 +1,11 @@
 <template>
     <div class="game-controls">
-      <button @click="startNewGame">Nuova Partita</button>
-      <button @click="resetGame">Resetta</button>
+    <button @click="startNewGame" class="button is-primary is-rounded is-large">
+      {{ $t('newGame') }}
+    </button>
+    <button @click="resetGame" class="button is-warning is-rounded is-large ml-2">
+      {{ $t('resetGame') }}
+    </button>
     </div>
   </template>
   

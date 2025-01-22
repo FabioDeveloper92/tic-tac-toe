@@ -8,20 +8,20 @@
       @update:playerX="updatePlayerX"
       @update:playerO="updatePlayerO"
     />
-   <div v-if=" playerO && playerX " class="notification is-centered">
-    <div v-if="winner" class="has-text-success">
-      Ha vinto {{ winner === 'X' ? playerX : playerO }}!
-    </div>
-    <div v-else-if="isDraw" class="has-text-warning">
-      Pareggio!
-    </div>
-    <div v-else-if="isStart" class="has-text-info">
-      E' il turno di {{ currentPlayer === 'X' ? playerX : playerO }}
-    </div>
-    <div v-else class="has-text-info">
-      Fai la prima mossa {{currentPlayer === 'X' ? playerX : playerO }}
-    </div>
+    <div v-if="playerO && playerX" class="notification is-centered">
+  <div v-if="winner" class="has-text-success">
+    {{ $t('winnerMessage', { player: winner === 'X' ? playerX : playerO }) }}
   </div>
+  <div v-else-if="isDraw" class="has-text-warning">
+    {{ $t('drawMessage') }}
+  </div>
+  <div v-else-if="isStart" class="has-text-info">
+    {{ $t('turnMessage', { player: currentPlayer === 'X' ? playerX : playerO }) }}
+  </div>
+  <div v-else class="has-text-info">
+    {{ $t('firstMoveMessage', { player: currentPlayer === 'X' ? playerX : playerO }) }}
+  </div>
+</div>
     <GameBoard v-if=" playerO && playerX " :board="board" @cellClicked="handleCellClick" />
     <GameControls
      v-if=" playerO && playerX "
