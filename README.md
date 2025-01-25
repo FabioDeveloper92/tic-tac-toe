@@ -38,7 +38,7 @@ To run the project locally:
    ```bash
    pnpm run dev
    ```
-5. Open your browser and go to `http://localhost:8080` to see the project in action.
+5. Open your browser and go to `http://localhost:5173` to see the project in action.
 
 ---
 
